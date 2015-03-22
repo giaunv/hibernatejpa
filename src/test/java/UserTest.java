@@ -1,5 +1,6 @@
-import model.Role;
-import model.User;
+import org.hibernate.LazyInitializationException;
+import tutorial.Role;
+import tutorial.User;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -102,5 +103,83 @@ public class UserTest extends AbstractTest {
 
 
         entityManager.close();
+    }
+
+    @Test
+    public void testFindUser() throws Exception {
+
+        EntityManager entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+        User user = new User();
+
+        String name = Long.toString(new Date().getTime());
+
+        user.setName(name);
+
+        Role role = new Role();
+
+        role.setName(name);
+
+        user.addRole(role);
+
+        entityManager.persist(role);
+        entityManager.persist(user);
+
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
+
+        User foundUser = entityManager.createNamedQuery("User.findByName", User.class).setParameter("name", name)
+                .getSingleResult();
+
+        System.out.println(foundUser);
+
+        Assert.assertEquals(name, foundUser.getName());
+
+        Assert.assertEquals(1, foundUser.getRoles().size());
+
+        System.out.println(foundUser.getRoles().getClass());
+
+        entityManager.close();
+    }
+
+    @Test(expected = LazyInitializationException.class)
+    public void testFindUser1() throws Exception {
+
+        EntityManager entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+        User user = new User();
+
+        String name = Long.toString(new Date().getTime());
+
+        user.setName(name);
+
+        Role role = new Role();
+
+        role.setName(name);
+
+        user.addRole(role);
+
+        entityManager.persist(role);
+        entityManager.persist(user);
+
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+
+        entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
+
+        User foundUser = entityManager.createNamedQuery("User.findByName", User.class).setParameter("name", name)
+                .getSingleResult();
+
+        entityManager.close();
+
+        Assert.assertEquals(1, foundUser.getRoles().size());
     }
 }
