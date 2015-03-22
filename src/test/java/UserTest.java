@@ -37,4 +37,30 @@ public class UserTest extends AbstractTest {
 
         entityManager.close();
     }
+
+    @Test(expected = Exception.class)
+    public void testNewUserWithTxn() throws Exception {
+
+        EntityManager entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
+
+        entityManager.getTransaction().begin();
+        try {
+            User user = new User();
+
+            user.setName(Long.toString(new Date().getTime()));
+
+            entityManager.persist(user);
+
+            if (true) {
+                throw new Exception();
+            }
+
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw e;
+        }
+
+        entityManager.close();
+    }
 }
