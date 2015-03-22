@@ -1,3 +1,4 @@
+import model.Role;
 import model.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -60,6 +61,45 @@ public class UserTest extends AbstractTest {
             entityManager.getTransaction().rollback();
             throw e;
         }
+
+        entityManager.close();
+    }
+
+    @Test
+    public void testNewUserAndAddRole() {
+
+        EntityManager entityManager = Persistence.createEntityManagerFactory("tutorialPU").createEntityManager();
+
+        entityManager.getTransaction().begin();
+
+        User user = new User();
+
+        user.setName(Long.toString(new Date().getTime()));
+
+        Role role = new Role();
+
+        role.setName(Long.toString(new Date().getTime()));
+
+        entityManager.persist(user);
+        entityManager.persist(role);
+
+        entityManager.getTransaction().commit();
+
+
+        Assert.assertEquals(0, user.getRoles().size());
+
+
+        entityManager.getTransaction().begin();
+
+        user.addRole(role);
+
+        entityManager.merge(user);
+
+        entityManager.getTransaction().commit();
+
+
+        Assert.assertEquals(1, user.getRoles().size());
+
 
         entityManager.close();
     }
