@@ -43,6 +43,12 @@
               description="User database that can be updated and saved"
               factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
               pathname="conf/tomcat-users.xml" />
+    <Resource auth="Container" 
+      driverClassName="org.apache.derby.jdbc.EmbeddedDriver" 
+      maxActive="8" maxIdle="4" 
+      name="jdbc/tutorialDS" type="javax.sql.DataSource" 
+      url="jdbc:derby:tutorialDB;create=true" 
+      username="" password="" />
   </GlobalNamingResources>
 
   <!-- A "Service" is a collection of one or more "Connectors" that share
