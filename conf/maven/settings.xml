@@ -133,7 +133,7 @@ under the License.
     <server>
       <id>TomcatServer</id>
       <username>admin</username>
-      <password>password</password>
+      <password>admin</password>
     </server>
   </servers>
 
