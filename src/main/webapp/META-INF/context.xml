@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <ResourceLink global="jdbc/tutorialDS" name="jdbc/tutorialDS" type="javax.sql.DataSource"/>
+</Context>
+
+<p>This makes the data-source managed by Tomcat available to our app. We also need a stub for src/main/webapp/WEB-INF/web.xml:</p>
+
+<web-app
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+version="2.5">
+</web-app>

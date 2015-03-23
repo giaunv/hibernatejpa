@@ -13,7 +13,8 @@
                 so you can check it to ensure it's not doing anything crazy -->
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
-            <!-- since most database servers have slightly different versions of the
+            <!-- since most database servers
+             have slightly different versions of the
                 SQL, Hibernate needs you to choose a dialect so it knows the subtleties of
                 talking to that server -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />

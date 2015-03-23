@@ -8,6 +8,10 @@
     <artifactId>hibernatejpa</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>war</packaging>
+
+
+
     <dependencies>
         <dependency>
             <groupId>org.apache.derby</groupId>
@@ -36,5 +40,28 @@
             <version>6.0.18</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost:8080/manager/text</url>
+                    <server>TomcatServer</server>
+                    <path>/tutorial</path>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
 </project>
