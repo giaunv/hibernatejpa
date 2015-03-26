@@ -13,6 +13,14 @@ public class UsersController {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @RequestMapping("/")
+    public String index(Model model) {
+
+        model.addAttribute("users", entityManager.createQuery("select u from User u").getResultList());
+
+        return "index";
+    }
+
     @RequestMapping("/users")
     public String users(Model model) {
 

@@ -73,7 +73,7 @@
                     <username>admin</username>
                     <password>admin</password>
                     <path>/tutorial</path>
-                    <!--<contextReloadable>true</contextReloadable>-->
+                    <contextReloadable>true</contextReloadable>
                 </configuration>
             </plugin>
         </plugins>
